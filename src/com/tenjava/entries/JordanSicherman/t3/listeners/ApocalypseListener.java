@@ -29,7 +29,7 @@ public class ApocalypseListener implements Listener {
 		Entity damaged = e.getEntity();
 
 		// Infect other entities if the damager is infected.
-		if (damaged instanceof LivingEntity && ApocalypseEvent.isInfected(damager) && !ApocalypseEvent.isInfected(damaged)) {
+		if (damaged instanceof LivingEntity && ApocalypseEvent.isInfected(damager)) {
 			ApocalypseEvent.infect((LivingEntity) damaged);
 		}
 	}
@@ -38,8 +38,6 @@ public class ApocalypseListener implements Listener {
 	private void onDeath(PlayerDeathEvent e) {
 		if (!EventManager.isInEffect(RandomEventType.APOCALYPSE)) { return; }
 
-		if (ApocalypseEvent.isInfected(e.getEntity())) {
-			ApocalypseEvent.uninfect(e.getEntity());
-		}
+		ApocalypseEvent.uninfect(e.getEntity());
 	}
 }

@@ -16,7 +16,7 @@ public abstract class RandomEvent {
 
 	public static enum RandomEventType {
 		APOCALYPSE(ApocalypseEvent.class), SMOG(PoisonAirEvent.class), PIRANHAS(PiranhasEvent.class), FOREST_FIRE(ForestFireEvent.class), MUSHROOM_RAIN(
-				MushroomRainEvent.class);
+				MushroomRainEvent.class), FASHION_SHOW(FashionShowEvent.class);
 
 		// Define important variables for retrieving a random value in this
 		// enum.

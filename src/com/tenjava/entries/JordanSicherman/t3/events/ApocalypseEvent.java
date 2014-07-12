@@ -67,9 +67,8 @@ public class ApocalypseEvent extends RandomEvent {
 		// Make sure we uninfect all the infectees from our starting world. May
 		// cause problems if an infectee leaves the world.
 		for (Entity entity : startWorld.getEntities()) {
-			if (isInfected(entity)) {
+			if (entity instanceof LivingEntity)
 				uninfect((LivingEntity) entity);
-			}
 		}
 
 		return true;
@@ -175,7 +174,7 @@ public class ApocalypseEvent extends RandomEvent {
 		case ZOMBIE:
 			// Spawn in an entity of the correct type.
 			LivingEntity newentity = (LivingEntity) entity.getWorld().spawnEntity(entity.getLocation(),
-					EntityType.valueOf(entity.getMetadata("APOCALYPSE").get(0).asString()));
+					(EntityType) (entity.getMetadata("APOCALYPSE").get(0).value()));
 			newentity.getEquipment().setArmorContents(entity.getEquipment().getArmorContents());
 			newentity.setHealth(entity.getHealth());
 			// Remove our zombie villager.
