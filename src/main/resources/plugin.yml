@@ -5,14 +5,12 @@ name: ${project.name}
 description: ${project.description}
 
 commands:
-  test:
-    description: Description.
-    permission: Eg.permission
-    aliases: [alternative, alt]
+  event:
+    description: Force a random event to happen.
+    permission: ${project.name}.*
+    aliases: [forceevent]
 
 permissions:
-  Permission:
-    description: Permission.
-    default: op, not op, false, true
-    children:
-      Somepermission: true
+  ${project.name}.*:
+    description: Permission to use ${project.name} events.
+    default: op
