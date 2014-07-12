@@ -7,7 +7,7 @@ This is a submission for the 2014 ten.java contest.
 
 - __Theme:__ This submission fulfills both! (more info further down).
 - __Time:__ Time 3 (7/12/2014 14:00 to 7/13/2014 00:00 UTC)
-- __MC Version:__ 1.7.9 (latest Bukkit beta)
+- __MC Version:__ 1.7.9-R0.2-SNAPSHOT
 - __Stream URL:__ None
 
 ---------------------------------------
@@ -30,6 +30,7 @@ Usage
 2. Choose from PRIMARY mode or SECONDARY mode in the config.
 2a. PRIMARY mode is the intended mode and fulfills 'What random events can occur in Minecraft?'. SECONDARY mode is just for fun and fulfills the second theme option.
 3. Join the server.
+4. Events will occur randomly over time (can be tracked in the console window) or be force-started via the command (keep reading).
 
 Description
 -----
@@ -42,9 +43,9 @@ Commands
 -----
 
 One command drives this plugin - /event.
-/event begin <event> [player]      will begin a specified event and, if given, at a specific player's location.
+/event begin {event} [player]      will begin a specified event and, if given, at a specific player's location.
 /event end      will end all events on the server.
-/event end <event>      will end all of the specified events on the server.
+/event end {event}      will end all of the specified events on the server.
 
 Events
 -----
