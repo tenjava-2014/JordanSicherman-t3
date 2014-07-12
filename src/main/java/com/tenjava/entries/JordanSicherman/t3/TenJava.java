@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class TenJava extends JavaPlugin {
 
-	public static TenJava instance;
+	public static TenJava instance; // :)
 
 	public static void log(String message) {
 		instance.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + message);
