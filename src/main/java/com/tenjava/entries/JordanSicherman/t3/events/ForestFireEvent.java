@@ -113,7 +113,7 @@ public class ForestFireEvent extends RandomEvent {
 				for (int x = -testRadius; x <= testRadius; x++) {
 					for (int y = -testRadius; y <= testRadius; y++) {
 						Block nearBlock = testBlock.getRelative(other[0], x).getRelative(other[1], y);
-						if (nearBlock.getType() == type && nearBlock.getRelative(BlockFace.UP).getType() == Material.AIR) {
+						if (nearBlock.getTypeId() == type.getId() && nearBlock.getRelative(BlockFace.UP).getType() == Material.AIR) {
 							TenJava.instance
 									.getServer()
 									.getScheduler()

@@ -65,6 +65,7 @@ public class MushroomRainEvent extends RandomEvent {
 		public void run() {
 			for (Player player : startWorld.getPlayers()) {
 				if (!player.isDead()) {
+					// Drop random mushrooms near each player.
 					Location location = player
 							.getLocation()
 							.clone()
