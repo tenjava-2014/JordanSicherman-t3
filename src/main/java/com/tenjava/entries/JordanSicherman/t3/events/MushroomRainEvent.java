@@ -8,19 +8,21 @@ import main.java.com.tenjava.entries.JordanSicherman.t3.RandomManager;
 import main.java.com.tenjava.entries.JordanSicherman.t3.TenJava;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 /**
  * @author Jordan
  * 
- *         A piranha event. Makes players take damage when in water.
+ *         A mushroom rain event. Will rain mushrooms above all players, just
+ *         for fun.
  */
-public class PiranhasEvent extends RandomEvent {
+public class MushroomRainEvent extends RandomEvent {
 
 	private transient World startWorld;
 	private BukkitTask task = null;
@@ -32,7 +34,7 @@ public class PiranhasEvent extends RandomEvent {
 	@Override
 	public void start() {
 		if (!canStart()) {
-			TenJava.log("A piranha event attempted to, and failed, to begin.");
+			TenJava.log("A mushroom rain event attempted to, and failed, to begin.");
 			return;
 		}
 
@@ -40,12 +42,12 @@ public class PiranhasEvent extends RandomEvent {
 		EventManager.registerEvent(this);
 
 		for (Player player : startWorld.getPlayers()) {
-			player.sendMessage(ChatColor.BLUE + "Piranhas fall from the sky into all bodies of water. Be careful!");
+			player.sendMessage(ChatColor.DARK_GRAY + "You see something fall from the sky...");
 		}
 
-		// Start some tasks to make piranhas damage the player every so
+		// Start some tasks to make mushrooms rain to the player every so
 		// often and cancel the task eventually.
-		task = TenJava.instance.getServer().getScheduler().runTaskTimer(TenJava.instance, new PiranhaInterrupt(), 60L, 60L);
+		task = TenJava.instance.getServer().getScheduler().runTaskTimer(TenJava.instance, new MushroomInterrupt(), 60L, 2L);
 		long duration = RandomManager.getRandomDuration(1200L, 4800L);
 		TenJava.instance.getServer().getScheduler().runTaskLater(TenJava.instance, new Runnable() {
 			@Override
@@ -54,17 +56,22 @@ public class PiranhasEvent extends RandomEvent {
 			}
 		}, duration);
 
-		TenJava.log("A piranha event began in " + startWorld.getName() + " and will clear in " + (duration / 20 / 60) + " minutes.");
+		TenJava.log("A mushroom rain event began in " + startWorld.getName() + " and will clear in " + (duration / 20 / 60) + " minutes.");
 	}
 
-	private class PiranhaInterrupt extends BukkitRunnable {
+	private class MushroomInterrupt extends BukkitRunnable {
 
 		@Override
 		public void run() {
 			for (Player player : startWorld.getPlayers()) {
-				if (!player.isDead() && player.getLocation().getBlock().isLiquid()) {
-					player.damage(1.0);
-					player.setLastDamageCause(new EntityDamageEvent(player, DamageCause.ENTITY_ATTACK, 1.0));
+				if (!player.isDead()) {
+					Location location = player
+							.getLocation()
+							.clone()
+							.add(RandomManager.getRandomDuration(0, 10) * (RandomManager.comparator() ? -1 : 1), 20,
+									RandomManager.getRandomDuration(0, 10) * (RandomManager.comparator() ? -1 : 1));
+					location.getWorld().dropItemNaturally(location,
+							new ItemStack(RandomManager.comparator() ? Material.RED_MUSHROOM : Material.BROWN_MUSHROOM));
 				}
 			}
 		}
@@ -77,13 +84,13 @@ public class PiranhasEvent extends RandomEvent {
 	public synchronized boolean stop() {
 		if (!isStarted()) { return false; }
 
-		TenJava.log("A piranha event ended.");
+		TenJava.log("A mushroom rain event ended.");
 		EventManager.unregisterEvent(this);
 
 		// Cancel the damaging task.
 		task.cancel();
 		for (Player player : startWorld.getPlayers()) {
-			player.sendMessage(ChatColor.BLUE + "Without sufficient food, the piranhas have died and the water is safe again.");
+			player.sendMessage(ChatColor.DARK_GRAY + "The clouds part and the shroomy rain ceases.");
 		}
 
 		return true;

@@ -65,4 +65,11 @@ public class RandomManager {
 			begin();
 		}
 	}
+
+	/**
+	 * @return either true or false.
+	 */
+	public static boolean comparator() {
+		return random.nextBoolean();
+	}
 }

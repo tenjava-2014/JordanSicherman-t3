@@ -64,7 +64,7 @@ public class PoisonAirEvent extends RandomEvent {
 		@Override
 		public void run() {
 			for (Player player : startWorld.getPlayers()) {
-				if (!player.getEyeLocation().getBlock().isLiquid()) {
+				if (!player.isDead() && !player.getEyeLocation().getBlock().isLiquid()) {
 					player.damage(1.0);
 					player.setLastDamageCause(new EntityDamageEvent(player, DamageCause.POISON, 1.0));
 				}
