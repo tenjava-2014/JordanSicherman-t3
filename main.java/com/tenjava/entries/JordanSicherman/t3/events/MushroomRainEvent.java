@@ -1,11 +1,7 @@
 /**
  * 
  */
-package main.java.com.tenjava.entries.JordanSicherman.t3.events;
-
-import main.java.com.tenjava.entries.JordanSicherman.t3.EventManager;
-import main.java.com.tenjava.entries.JordanSicherman.t3.RandomManager;
-import main.java.com.tenjava.entries.JordanSicherman.t3.TenJava;
+package com.tenjava.entries.JordanSicherman.t3.events;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -15,6 +11,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+
+import com.tenjava.entries.JordanSicherman.t3.EventManager;
+import com.tenjava.entries.JordanSicherman.t3.RandomManager;
+import com.tenjava.entries.JordanSicherman.t3.TenJava;
 
 /**
  * @author Jordan

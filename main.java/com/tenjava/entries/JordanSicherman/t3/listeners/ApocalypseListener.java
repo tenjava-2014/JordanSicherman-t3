@@ -1,11 +1,7 @@
 /**
  * 
  */
-package main.java.com.tenjava.entries.JordanSicherman.t3.listeners;
-
-import main.java.com.tenjava.entries.JordanSicherman.t3.EventManager;
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.ApocalypseEvent;
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
+package com.tenjava.entries.JordanSicherman.t3.listeners;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -14,6 +10,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+
+import com.tenjava.entries.JordanSicherman.t3.EventManager;
+import com.tenjava.entries.JordanSicherman.t3.events.ApocalypseEvent;
+import com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
 
 /**
  * @author Jordan

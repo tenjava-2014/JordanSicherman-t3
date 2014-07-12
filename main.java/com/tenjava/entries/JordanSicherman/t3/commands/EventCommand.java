@@ -1,17 +1,17 @@
 /**
  * 
  */
-package main.java.com.tenjava.entries.JordanSicherman.t3.commands;
-
-import main.java.com.tenjava.entries.JordanSicherman.t3.EventManager;
-import main.java.com.tenjava.entries.JordanSicherman.t3.TenJava;
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
+package com.tenjava.entries.JordanSicherman.t3.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.tenjava.entries.JordanSicherman.t3.EventManager;
+import com.tenjava.entries.JordanSicherman.t3.TenJava;
+import com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
 
 /**
  * @author Jordan

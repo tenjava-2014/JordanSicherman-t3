@@ -1,16 +1,16 @@
 /**
  * 
  */
-package main.java.com.tenjava.entries.JordanSicherman.t3;
+package com.tenjava.entries.JordanSicherman.t3;
 
 import java.util.List;
 import java.util.Random;
 
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent;
-
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import com.tenjava.entries.JordanSicherman.t3.events.RandomEvent;
 
 /**
  * @author Jordan

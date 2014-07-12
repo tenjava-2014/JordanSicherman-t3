@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.java.com.tenjava.entries.JordanSicherman.t3.events;
+package com.tenjava.entries.JordanSicherman.t3.events;
 
 import java.util.Arrays;
 import java.util.Collections;

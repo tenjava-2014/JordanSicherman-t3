@@ -1,10 +1,7 @@
 /**
  * 
  */
-package main.java.com.tenjava.entries.JordanSicherman.t3.events;
-
-import main.java.com.tenjava.entries.JordanSicherman.t3.EventManager;
-import main.java.com.tenjava.entries.JordanSicherman.t3.TenJava;
+package com.tenjava.entries.JordanSicherman.t3.events;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -16,6 +13,9 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import com.tenjava.entries.JordanSicherman.t3.EventManager;
+import com.tenjava.entries.JordanSicherman.t3.TenJava;
 
 /**
  * @author Jordan

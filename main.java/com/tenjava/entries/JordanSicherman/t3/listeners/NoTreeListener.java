@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.java.com.tenjava.entries.JordanSicherman.t3.listeners;
+package com.tenjava.entries.JordanSicherman.t3.listeners;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;

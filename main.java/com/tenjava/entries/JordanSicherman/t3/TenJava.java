@@ -1,16 +1,16 @@
 /**
  * 
  */
-package main.java.com.tenjava.entries.JordanSicherman.t3;
-
-import main.java.com.tenjava.entries.JordanSicherman.t3.commands.EventCommand;
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.FoodRotEvent;
-import main.java.com.tenjava.entries.JordanSicherman.t3.listeners.ApocalypseListener;
-import main.java.com.tenjava.entries.JordanSicherman.t3.listeners.NoTreeListener;
+package com.tenjava.entries.JordanSicherman.t3;
 
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.tenjava.entries.JordanSicherman.t3.commands.EventCommand;
+import com.tenjava.entries.JordanSicherman.t3.events.FoodRotEvent;
+import com.tenjava.entries.JordanSicherman.t3.listeners.ApocalypseListener;
+import com.tenjava.entries.JordanSicherman.t3.listeners.NoTreeListener;
 
 /**
  * @author Jordan

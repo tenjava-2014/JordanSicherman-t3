@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.java.com.tenjava.entries.JordanSicherman.t3;
+package com.tenjava.entries.JordanSicherman.t3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,13 +14,13 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.ApocalypseEvent;
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.ForestFireEvent;
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.MushroomRainEvent;
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.PiranhasEvent;
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.PoisonAirEvent;
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent;
-import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
+import com.tenjava.entries.JordanSicherman.t3.events.ApocalypseEvent;
+import com.tenjava.entries.JordanSicherman.t3.events.ForestFireEvent;
+import com.tenjava.entries.JordanSicherman.t3.events.MushroomRainEvent;
+import com.tenjava.entries.JordanSicherman.t3.events.PiranhasEvent;
+import com.tenjava.entries.JordanSicherman.t3.events.PoisonAirEvent;
+import com.tenjava.entries.JordanSicherman.t3.events.RandomEvent;
+import com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
 
 /**
  * @author Jordan
