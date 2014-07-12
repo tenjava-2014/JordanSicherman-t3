@@ -16,6 +16,7 @@ import org.bukkit.entity.LivingEntity;
 
 import com.tenjava.entries.JordanSicherman.t3.events.ApocalypseEvent;
 import com.tenjava.entries.JordanSicherman.t3.events.FashionShowEvent;
+import com.tenjava.entries.JordanSicherman.t3.events.FallingStarEvent;
 import com.tenjava.entries.JordanSicherman.t3.events.ForestFireEvent;
 import com.tenjava.entries.JordanSicherman.t3.events.MushroomRainEvent;
 import com.tenjava.entries.JordanSicherman.t3.events.PiranhasEvent;
@@ -149,6 +150,12 @@ public class EventManager {
 			FashionShowEvent fashionEvent = new FashionShowEvent();
 			fashionEvent.setInitializer(proximity == null ? TenJava.instance.getServer().getWorlds().get(0) : proximity.getWorld());
 			fashionEvent.start();
+			break;
+		case FALLING_STAR:
+			if (proximity == null) { return false; }
+			FallingStarEvent starEvent = new FallingStarEvent();
+			starEvent.setInitializer(proximity);
+			starEvent.start();
 			break;
 		default:
 			break;

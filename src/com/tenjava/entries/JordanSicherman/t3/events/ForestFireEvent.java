@@ -118,7 +118,7 @@ public class ForestFireEvent extends RandomEvent {
 									.getServer()
 									.getScheduler()
 									.runTaskLater(TenJava.instance, new SmiteInterrupt(nearBlock),
-											RandomManager.getRandomDuration(count * 5L, count * 5L + 20L));
+											RandomManager.getRandomInRange(count * 5L, count * 5L + 20L));
 							amount--;
 							count++;
 							if (amount <= 0) { return; }

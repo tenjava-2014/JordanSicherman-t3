@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.tenjava.entries.JordanSicherman.t3.commands.EventCommand;
 import com.tenjava.entries.JordanSicherman.t3.events.FoodRotEvent;
 import com.tenjava.entries.JordanSicherman.t3.listeners.ApocalypseListener;
+import com.tenjava.entries.JordanSicherman.t3.listeners.FallingStarListener;
 import com.tenjava.entries.JordanSicherman.t3.listeners.NoTreeListener;
 
 /**
@@ -45,6 +46,7 @@ public class TenJava extends JavaPlugin {
 
 		// Register our events.
 		pm.registerEvents(new ApocalypseListener(), this);
+		pm.registerEvents(new FallingStarListener(), this);
 
 		// Start our random manager to allow events to begin occuring.
 		RandomManager.begin();

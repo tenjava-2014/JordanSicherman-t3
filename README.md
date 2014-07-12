@@ -58,3 +58,7 @@ Piranhas: Unlike the smog event, water becomes the issue. Players in the water e
 Forest Fire: When initialized, lightning will strike down from the heavens upon a nearby tree grove igniting them and allowing nature to take its course.
 
 Mushroom Rain: By some unknown miracle, red and brown mushrooms begin to fall from the heavens around all players. This event is timed.
+
+Fashion Show: Some Minecraft mobs are smarter than most imagine. When this event starts, all the mobs in the event world dress up until they either die or the event is ended.
+
+Falling Star: From the sky rains down a spectacular meteor carrying ores from another planet. Once landed, a player is able to mine up all these ores for their own.

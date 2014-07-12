@@ -48,7 +48,7 @@ public class MushroomRainEvent extends RandomEvent {
 		// Start some tasks to make mushrooms rain to the player every so
 		// often and cancel the task eventually.
 		task = TenJava.instance.getServer().getScheduler().runTaskTimer(TenJava.instance, new MushroomInterrupt(), 60L, 2L);
-		long duration = RandomManager.getRandomDuration(1200L, 4800L);
+		long duration = RandomManager.getRandomInRange(1200L, 4800L);
 		TenJava.instance.getServer().getScheduler().runTaskLater(TenJava.instance, new Runnable() {
 			@Override
 			public void run() {
@@ -69,8 +69,8 @@ public class MushroomRainEvent extends RandomEvent {
 					Location location = player
 							.getLocation()
 							.clone()
-							.add(RandomManager.getRandomDuration(0, 10) * (RandomManager.comparator() ? -1 : 1), 20,
-									RandomManager.getRandomDuration(0, 10) * (RandomManager.comparator() ? -1 : 1));
+							.add(RandomManager.getRandomInRange(0, 10) * (RandomManager.comparator() ? -1 : 1), 20,
+									RandomManager.getRandomInRange(0, 10) * (RandomManager.comparator() ? -1 : 1));
 					location.getWorld().dropItemNaturally(location,
 							new ItemStack(RandomManager.comparator() ? Material.RED_MUSHROOM : Material.BROWN_MUSHROOM));
 				}

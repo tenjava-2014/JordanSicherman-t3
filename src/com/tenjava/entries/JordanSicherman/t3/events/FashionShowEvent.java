@@ -6,12 +6,13 @@ package com.tenjava.entries.JordanSicherman.t3.events;
 import java.util.Arrays;
 import java.util.Random;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -49,6 +50,10 @@ public class FashionShowEvent extends RandomEvent {
 
 		isStarted = true;
 		TenJava.log("A fashion show event began in " + startWorld.getName() + ".");
+		
+		for (Player player : startWorld.getPlayers()) {
+			player.sendMessage(ChatColor.LIGHT_PURPLE + "The mobs are putting on a show!");
+		}
 	}
 
 	/* (non-Javadoc)
@@ -65,6 +70,10 @@ public class FashionShowEvent extends RandomEvent {
 		for (Entity entity : startWorld.getEntities()) {
 			if (entity instanceof LivingEntity)
 				unfashion((LivingEntity) entity);
+		}
+		
+		for (Player player : startWorld.getPlayers()) {
+			player.sendMessage(ChatColor.LIGHT_PURPLE + "Show time is over.");
 		}
 		return true;
 	}

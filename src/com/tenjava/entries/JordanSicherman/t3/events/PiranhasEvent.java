@@ -46,7 +46,7 @@ public class PiranhasEvent extends RandomEvent {
 		// Start some tasks to make piranhas damage the player every so
 		// often and cancel the task eventually.
 		task = TenJava.instance.getServer().getScheduler().runTaskTimer(TenJava.instance, new PiranhaInterrupt(), 60L, 60L);
-		long duration = RandomManager.getRandomDuration(1200L, 4800L);
+		long duration = RandomManager.getRandomInRange(1200L, 4800L);
 		TenJava.instance.getServer().getScheduler().runTaskLater(TenJava.instance, new Runnable() {
 			@Override
 			public void run() {

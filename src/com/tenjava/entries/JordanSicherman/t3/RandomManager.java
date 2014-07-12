@@ -24,7 +24,7 @@ public class RandomManager {
 	public static void begin() {
 		isRunning = true;
 		// Get a random time between 5 and 20 minutes.
-		long time = getRandomDuration(6000L, 24000L);
+		long time = getRandomInRange(6000L, 24000L);
 		TenJava.log("A new event will start in " + (time / 20 / 60) + " minutes.");
 		TenJava.instance.getServer().getScheduler().runTaskLater(TenJava.instance, new RandomInterrupt(), time);
 	}
@@ -32,7 +32,7 @@ public class RandomManager {
 	/**
 	 * @return a random long between @param min and @param max.
 	 */
-	public static long getRandomDuration(long min, long max) {
+	public static long getRandomInRange(long min, long max) {
 		// Get a random tick number between 5 minutes and 20 minutes.
 		return min + ((long) (random.nextDouble() * (max - min)));
 	}

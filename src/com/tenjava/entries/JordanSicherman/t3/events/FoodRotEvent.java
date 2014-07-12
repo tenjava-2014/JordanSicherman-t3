@@ -36,10 +36,10 @@ public class FoodRotEvent {
 		@Override
 		public void run() {
 			for (Player player : Bukkit.getOnlinePlayers()) {
-				if (RandomManager.getRandomDuration(0, 400) <= 1) {
+				if (RandomManager.getRandomInRange(0, 400) <= 1) {
 					for (ItemStack item : player.getInventory().getContents()) {
 						// It's food!
-						if (isFood(item.getType()) && RandomManager.getRandomDuration(0, 36) == 1L) {
+						if (isFood(item.getType()) && RandomManager.getRandomInRange(0, 36) == 1L) {
 							// More than one item...
 							if (item.getAmount() > 1) {
 								item.setAmount(item.getAmount() - 1);
