@@ -5,10 +5,16 @@ package main.java.com.tenjava.entries.JordanSicherman.t3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 
+import main.java.com.tenjava.entries.JordanSicherman.t3.events.ApocalypseEvent;
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent;
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
 
@@ -18,8 +24,10 @@ import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.Rando
  */
 public class EventManager {
 
+	private static Random random = new Random();
+
 	// All events on the server.
-	private static List<RandomEvent> serverEvents = new ArrayList<RandomEvent>();
+	private static Set<RandomEvent> serverEvents = new HashSet<RandomEvent>();
 
 	/**
 	 * Register an event.
@@ -38,14 +46,14 @@ public class EventManager {
 	 *            The event.
 	 * @return true if the event could be unregistered.
 	 */
-	public static boolean unregisterEvent(RandomEvent event) {
+	public synchronized static boolean unregisterEvent(RandomEvent event) {
 		return serverEvents.remove(event);
 	}
 
 	/**
 	 * @see EventManager#stopAllEvents(RandomEventType... type).
 	 */
-	public static int stopAllEvents() {
+	public synchronized static int stopAllEvents() {
 		return stopAllEvents(RandomEventType.values());
 	}
 
@@ -56,7 +64,7 @@ public class EventManager {
 	 *            The RandomEventType(s) to stop.
 	 * @return the number of events stopped.
 	 */
-	public static int stopAllEvents(RandomEventType... type) {
+	public synchronized static int stopAllEvents(RandomEventType... type) {
 		int count = 0;
 		List<RandomEventType> types = Arrays.asList(type);
 
@@ -84,7 +92,7 @@ public class EventManager {
 	public static boolean isInEffect(RandomEventType type) {
 		// Compare the class of every current event to that of the one in
 		// question.
-		for (RandomEvent event : serverEvents) {
+		for (RandomEvent event : new HashSet<RandomEvent>(serverEvents)) {
 			// If the classes are equal, we have our match!
 			if (event.getClass().equals(type.getUnderlyingClass())) { return true; }
 		}
@@ -100,14 +108,65 @@ public class EventManager {
 	 * @param proximity
 	 *            A location near where the event should start (or null if not
 	 *            required).
+	 * @return false if proximity was required and not provided.
 	 */
-	public static void initializeEvent(RandomEventType type, Location proximity) {
-		// TODO
+	public static boolean initializeEvent(RandomEventType type, Location proximity) {
 		switch (type) {
 		case APOCALYPSE:
+			if (proximity == null) { return false; }
+			List<LivingEntity> entities = getNearbyEntities(proximity, 10);
+			ApocalypseEvent event = new ApocalypseEvent();
+			event.setInitializer(entities.get(random.nextInt(entities.size())));
+			event.start();
 			break;
 		default:
 			break;
 		}
+
+		return true;
+	}
+
+	/**
+	 * Get humanoid entities nearby a location.
+	 * 
+	 * @param location
+	 *            The location.
+	 * @param radius
+	 *            The radius to check.
+	 * @return The HashSet of humanoid entities near the location.
+	 */
+	private static List<LivingEntity> getNearbyEntities(Location location, int radius) {
+		int radiusSquared = radius * radius;
+		int chunkRadius = radius < 16 ? 1 : (radius - (radius % 16)) / 16;
+		List<LivingEntity> radiusEntities = new ArrayList<LivingEntity>();
+		for (int chunkX = -chunkRadius; chunkX <= chunkRadius; chunkX++) {
+			for (int chunkZ = -chunkRadius; chunkZ <= chunkRadius; chunkZ++) {
+				int x = (int) location.getX();
+				int y = (int) location.getY();
+				int z = (int) location.getZ();
+				Location inLocation = new Location(location.getWorld(), x + (chunkX * 16), y, z + (chunkZ * 16));
+				for (Entity entity : inLocation.getChunk().getEntities()) {
+					// Only use humanoid entities.
+					switch (entity.getType()) {
+					case CREEPER:
+					case ZOMBIE:
+					case ENDERMAN:
+					case PIG_ZOMBIE:
+					case VILLAGER:
+					case WITCH:
+					case SKELETON:
+					case PLAYER:
+						break;
+					default:
+						continue;
+					}
+
+					if (entity.getLocation().distanceSquared(location) <= radiusSquared
+							&& entity.getLocation().getBlock() != location.getBlock())
+						radiusEntities.add((LivingEntity) entity);
+				}
+			}
+		}
+		return radiusEntities;
 	}
 }

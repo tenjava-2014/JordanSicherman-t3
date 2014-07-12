@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 /**
  * @author Jordan
@@ -30,6 +31,15 @@ public class ApocalypseListener implements Listener {
 		// Infect other entities if the damager is infected.
 		if (damaged instanceof LivingEntity && ApocalypseEvent.isInfected(damager) && !ApocalypseEvent.isInfected(damaged)) {
 			ApocalypseEvent.infect((LivingEntity) damaged);
+		}
+	}
+
+	@EventHandler
+	private void onDeath(PlayerDeathEvent e) {
+		if (!EventManager.isInEffect(RandomEventType.APOCALYPSE)) { return; }
+
+		if (ApocalypseEvent.isInfected(e.getEntity())) {
+			ApocalypseEvent.uninfect(e.getEntity());
 		}
 	}
 }

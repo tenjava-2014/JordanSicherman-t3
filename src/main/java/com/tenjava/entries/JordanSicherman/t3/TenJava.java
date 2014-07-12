@@ -4,6 +4,7 @@
 package main.java.com.tenjava.entries.JordanSicherman.t3;
 
 import main.java.com.tenjava.entries.JordanSicherman.t3.commands.EventCommand;
+import main.java.com.tenjava.entries.JordanSicherman.t3.listeners.ApocalypseListener;
 
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
@@ -36,6 +37,7 @@ public class TenJava extends JavaPlugin {
 
 		// Register our events.
 		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvents(new ApocalypseListener(), this);
 
 		// Start our random manager to allow events to begin occuring.
 		RandomManager.begin();

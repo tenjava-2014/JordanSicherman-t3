@@ -7,9 +7,7 @@ import main.java.com.tenjava.entries.JordanSicherman.t3.EventManager;
 import main.java.com.tenjava.entries.JordanSicherman.t3.TenJava;
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -92,9 +90,13 @@ public class EventCommand implements CommandExecutor {
 				player = TenJava.instance.getServer().getPlayer(args[2]);
 			}
 
-			EventManager.initializeEvent(type, player == null ? null : player.getLocation());
-			sender.sendMessage(ChatColor.YELLOW + "The event '" + type.toString().toLowerCase() + "' has been started"
-					+ (player == null ? "." : ("near " + player.getName() + ".")));
+			boolean startedEvent = EventManager.initializeEvent(type, player == null ? null : player.getLocation());
+			if (startedEvent) {
+				sender.sendMessage(ChatColor.YELLOW + "The event '" + type.toString().toLowerCase() + "' has been started"
+						+ (player == null ? "." : (" near " + player.getName() + ".")));
+			} else {
+				sender.sendMessage(ChatColor.RED + "A player name must also be provided for this event to begin.");
+			}
 			return true;
 		}
 

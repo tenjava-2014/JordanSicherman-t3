@@ -23,7 +23,9 @@ public class RandomManager {
 
 	public static void begin() {
 		isRunning = true;
-		TenJava.instance.getServer().getScheduler().runTaskLater(TenJava.instance, new RandomInterrupt(), timeUntilEvent());
+		long time = timeUntilEvent();
+		TenJava.log("A new event will start in " + (time / 20) + " seconds.");
+		TenJava.instance.getServer().getScheduler().runTaskLater(TenJava.instance, new RandomInterrupt(), time);
 	}
 
 	/**
@@ -59,7 +61,7 @@ public class RandomManager {
 			if (!isRunning || players.isEmpty()) { return; }
 
 			// Start a random event.
-			EventManager.initializeEvent(RandomEvent.RandomEventType.getRandom(), players.get(random.nextInt(players.size() + 1))
+			EventManager.initializeEvent(RandomEvent.RandomEventType.getRandom(), players.get(random.nextInt(players.size()))
 					.getLocation());
 
 			// Start a new random scheduler.

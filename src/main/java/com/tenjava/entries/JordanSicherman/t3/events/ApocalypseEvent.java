@@ -8,10 +8,12 @@ import java.util.UUID;
 import main.java.com.tenjava.entries.JordanSicherman.t3.EventManager;
 import main.java.com.tenjava.entries.JordanSicherman.t3.TenJava;
 
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
@@ -47,13 +49,17 @@ public class ApocalypseEvent extends RandomEvent {
 		infect(initializer);
 
 		TenJava.log("An apocalypse event began in " + startWorld.getName() + " with entity #" + initializer.getEntityId() + ".");
+
+		for (Player player : startWorld.getPlayers()) {
+			player.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "An APOCALYPSE has begun!");
+		}
 	}
 
 	/* (non-Javadoc)
 	 * @see main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent#stop()
 	 */
 	@Override
-	public boolean stop() {
+	public synchronized boolean stop() {
 		TenJava.log("An apocalypse event ended.");
 		EventManager.unregisterEvent(this);
 
@@ -123,6 +129,7 @@ public class ApocalypseEvent extends RandomEvent {
 			Zombie zombie = (Zombie) entity.getWorld().spawnEntity(entity.getLocation(), EntityType.ZOMBIE);
 			zombie.setVillager(true);
 			zombie.getEquipment().setArmorContents(entity.getEquipment().getArmorContents());
+			zombie.getEquipment().setItemInHand(entity.getEquipment().getItemInHand());
 			zombie.setHealth(entity.getHealth());
 			// Remove our old entity.
 			entity.remove();
@@ -131,6 +138,9 @@ public class ApocalypseEvent extends RandomEvent {
 			// Give the entity a fixed meta value and a potion effect.
 			entity.setMetadata("APOCALYPSE", new FixedMetadataValue(TenJava.instance, type));
 			entity.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, Integer.MAX_VALUE, 0));
+			if (type == EntityType.PLAYER)
+				((Player) entity).sendMessage(ChatColor.YELLOW
+						+ "You have been infected! Any humanoid entity you touch will become infected too.");
 			break;
 		default:
 			break;
@@ -142,7 +152,7 @@ public class ApocalypseEvent extends RandomEvent {
 	 *            The entity in question.
 	 * @return true if the entity is infected (has certain metadata).
 	 */
-	public static boolean isInfected(Entity entity) {
+	public static synchronized boolean isInfected(Entity entity) {
 		return entity.hasMetadata("APOCALYPSE");
 	}
 
@@ -152,7 +162,7 @@ public class ApocalypseEvent extends RandomEvent {
 	 * @param entity
 	 *            The entity to uninfect.
 	 */
-	public static void uninfect(LivingEntity entity) {
+	public static synchronized void uninfect(LivingEntity entity) {
 		if (!isInfected(entity)) { return; }
 
 		EntityType type = entity.getType();
