@@ -15,7 +15,7 @@ import java.util.Random;
 public abstract class RandomEvent {
 
 	public static enum RandomEventType {
-		APOCALYPSE(ApocalypseEvent.class);
+		APOCALYPSE(ApocalypseEvent.class), SMOG(PoisonAirEvent.class);
 
 		// Define important variables for retrieving a random value in this
 		// enum.

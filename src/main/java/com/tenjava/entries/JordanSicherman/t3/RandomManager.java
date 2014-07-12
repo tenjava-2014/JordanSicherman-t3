@@ -23,19 +23,16 @@ public class RandomManager {
 
 	public static void begin() {
 		isRunning = true;
-		long time = timeUntilEvent();
-		TenJava.log("A new event will start in " + (time / 20) + " seconds.");
+		// Get a random time between 5 and 20 minutes.
+		long time = getRandomDuration(6000L, 24000L);
+		TenJava.log("A new event will start in " + (time / 20 / 60) + " minutes.");
 		TenJava.instance.getServer().getScheduler().runTaskLater(TenJava.instance, new RandomInterrupt(), time);
 	}
 
 	/**
-	 * @return a random number of ticks until an event can occur (between 5 and
-	 *         20 minutes).
+	 * @return a random long between @param min and @param max.
 	 */
-	private static long timeUntilEvent() {
-		long min = 6000L; // 5 minutes.
-		long max = 24000L; // 20 minutes.
-
+	public static long getRandomDuration(long min, long max) {
 		// Get a random tick number between 5 minutes and 20 minutes.
 		return min + ((long) (random.nextDouble() * (max - min)));
 	}
@@ -61,8 +58,8 @@ public class RandomManager {
 			if (!isRunning || players.isEmpty()) { return; }
 
 			// Start a random event.
-			EventManager.initializeEvent(RandomEvent.RandomEventType.getRandom(), players.get(random.nextInt(players.size()))
-					.getLocation());
+			EventManager
+					.initializeEvent(RandomEvent.RandomEventType.getRandom(), players.get(random.nextInt(players.size())).getLocation());
 
 			// Start a new random scheduler.
 			begin();

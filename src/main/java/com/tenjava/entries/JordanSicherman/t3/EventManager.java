@@ -15,6 +15,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.ApocalypseEvent;
+import main.java.com.tenjava.entries.JordanSicherman.t3.events.PoisonAirEvent;
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent;
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
 
@@ -69,7 +70,7 @@ public class EventManager {
 		List<RandomEventType> types = Arrays.asList(type);
 
 		// Iterate and stop everything.
-		for (RandomEvent event : serverEvents) {
+		for (RandomEvent event : new HashSet<RandomEvent>(serverEvents)) {
 			for (RandomEventType randomevent : types) {
 				if (event.getClass().equals(randomevent.getUnderlyingClass())) {
 					if (event.stop()) {
@@ -115,9 +116,14 @@ public class EventManager {
 		case APOCALYPSE:
 			if (proximity == null) { return false; }
 			List<LivingEntity> entities = getNearbyEntities(proximity, 10);
-			ApocalypseEvent event = new ApocalypseEvent();
-			event.setInitializer(entities.get(random.nextInt(entities.size())));
-			event.start();
+			ApocalypseEvent apocEvent = new ApocalypseEvent();
+			apocEvent.setInitializer(entities.get(random.nextInt(entities.size())));
+			apocEvent.start();
+			break;
+		case SMOG:
+			PoisonAirEvent smogEvent = new PoisonAirEvent();
+			smogEvent.setInitializer(proximity == null ? TenJava.instance.getServer().getWorlds().get(0) : proximity.getWorld());
+			smogEvent.start();
 			break;
 		default:
 			break;

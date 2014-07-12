@@ -3,8 +3,6 @@
  */
 package main.java.com.tenjava.entries.JordanSicherman.t3.events;
 
-import java.util.UUID;
-
 import main.java.com.tenjava.entries.JordanSicherman.t3.EventManager;
 import main.java.com.tenjava.entries.JordanSicherman.t3.TenJava;
 
@@ -43,15 +41,16 @@ public class ApocalypseEvent extends RandomEvent {
 			return;
 		}
 
+		isStarted = true;
 		EventManager.registerEvent(this);
 
 		startWorld = initializer.getWorld();
-		infect(initializer);
+		if (infect(initializer)) {
+			TenJava.log("An apocalypse event began in " + startWorld.getName() + " with entity #" + initializer.getEntityId() + ".");
 
-		TenJava.log("An apocalypse event began in " + startWorld.getName() + " with entity #" + initializer.getEntityId() + ".");
-
-		for (Player player : startWorld.getPlayers()) {
-			player.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "An APOCALYPSE has begun!");
+			for (Player player : startWorld.getPlayers()) {
+				player.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "An APOCALYPSE has begun!");
+			}
 		}
 	}
 
@@ -60,6 +59,8 @@ public class ApocalypseEvent extends RandomEvent {
 	 */
 	@Override
 	public synchronized boolean stop() {
+		if (!isStarted()) { return false; }
+
 		TenJava.log("An apocalypse event ended.");
 		EventManager.unregisterEvent(this);
 
@@ -113,8 +114,11 @@ public class ApocalypseEvent extends RandomEvent {
 	 * 
 	 * @param entity
 	 *            The entity.
+	 * @return true if the entity was infected (false if already infected).
 	 */
-	public static void infect(LivingEntity entity) {
+	public static boolean infect(LivingEntity entity) {
+		if (isInfected(entity)) { return false; }
+
 		EntityType type = entity.getType();
 
 		switch (type) {
@@ -141,9 +145,9 @@ public class ApocalypseEvent extends RandomEvent {
 			if (type == EntityType.PLAYER)
 				((Player) entity).sendMessage(ChatColor.YELLOW
 						+ "You have been infected! Any humanoid entity you touch will become infected too.");
-			break;
+			return true;
 		default:
-			break;
+			return false;
 		}
 	}
 
