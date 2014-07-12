@@ -6,7 +6,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.authors>TeeePeee</project.authors>
-    <project.main>com.tenjava.entries.JordanSicherman.t3.TenJava</project.main> <!-- This might be wrong in Maven :S -->
+    <project.main>com.tenjava.entries.JordanSicherman.t3.TenJava</project.main>
     <project.name>TenJava</project.name>
     <project.description>A plugin for a contest.</project.description>
   </properties>
@@ -55,7 +55,6 @@
         <version>2.3.1</version>
         <configuration>
           <finalName>${project.name}</finalName>
-          <!-- <outputDirectory>D:\Users\Jordan\Minecraft\Server\plugins</outputDirectory>  -->
         </configuration>
       </plugin>
       <plugin>
