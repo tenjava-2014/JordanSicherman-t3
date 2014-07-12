@@ -42,24 +42,26 @@ There is one event that is always active - the food rot event. There is a random
 Commands
 -----
 
-One command drives this plugin - /event.
-/event begin {event} [player]      will begin a specified event and, if given, at a specific player's location.
-/event end      will end all events on the server.
-/event end {event}      will end all of the specified events on the server.
+One command drives this plugin -- /event.
+* /event begin {event} [player]      will begin a specified event and, if given, at a specific player's location.
+* /event end      will end all events on the server.
+* /event end {event}      will end all of the specified events on the server.
 
 Events
 -----
 
-Apocalypse: A random humanoid entity will be chosen to be infected. This entity will become a zombie villager with a potion effect and any humanoid entity it touches will become infected too. This event ends when either all infected entities die or the command is executed (all changed entities revert to normal).
+1. Apocalypse: A random humanoid entity will be chosen to be infected. This entity will become a zombie villager with a potion effect and any humanoid entity it touches will become infected too. This event ends when either all infected entities die or the command is executed (all changed entities revert to normal).
 
-Smog: The air becomes poisonous! Players must take shelter underwater (or lava) to avoid taking constant damage. This event ends after a time, or the end command is executed.
+2. Smog: The air becomes poisonous! Players must take shelter underwater (or lava) to avoid taking constant damage. This event ends after a time, or the end command is executed.
 
-Piranhas: Unlike the smog event, water becomes the issue. Players in the water experience constant damage from piranhas. This event is also timed.
+3. Piranhas: Unlike the smog event, water becomes the issue. Players in the water experience constant damage from piranhas. This event is also timed.
 
-Forest Fire: When initialized, lightning will strike down from the heavens upon a nearby tree grove igniting them and allowing nature to take its course.
+4. Forest Fire: When initialized, lightning will strike down from the heavens upon a nearby tree grove igniting them and allowing nature to take its course.
 
-Mushroom Rain: By some unknown miracle, red and brown mushrooms begin to fall from the heavens around all players. This event is timed.
+5. Mushroom Rain: By some unknown miracle, red and brown mushrooms begin to fall from the heavens around all players. This event is timed.
 
-Fashion Show: Some Minecraft mobs are smarter than most imagine. When this event starts, all the mobs in the event world dress up until they either die or the event is ended.
+6. Fashion Show: Some Minecraft mobs are smarter than most imagine. When this event starts, all the mobs in the event world dress up until they either die or the event is ended.
 
-Falling Star: From the sky rains down a spectacular meteor carrying ores from another planet. Once landed, a player is able to mine up all these ores for their own.
+7. Falling Star: From the sky rains down a spectacular meteor carrying ores from another planet. Once landed, a player is able to mine up all these ores for their own.
+
+8. Food Rot: Over time, food (such as those listed in the Foodstuffs tab in Minecraft) will decay to rotten flesh - only if they're being carried by a player.
