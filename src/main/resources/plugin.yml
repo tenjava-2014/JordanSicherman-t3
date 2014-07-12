@@ -1,0 +1,18 @@
+author: ${project.authors}
+main: ${project.main}
+version: ${version}
+name: ${project.name}
+description: ${project.description}
+
+commands:
+  test:
+    description: Description.
+    permission: Eg.permission
+    aliases: [alternative, alt]
+
+permissions:
+  Permission:
+    description: Permission.
+    default: op, not op, false, true
+    children:
+      Somepermission: true

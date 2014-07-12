@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>TenJava</groupId>
+  <artifactId>TenJava</artifactId>
+  <version>10</version>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.authors>TeeePeee</project.authors>
+    <project.main>main.java.com.tenjava.entries.JordanSicherman.t3.TenJava</project.main>
+    <project.name>TenJava</project.name>
+    <project.description>A plugin for a contest.</project.description>
+  </properties>
+  
+  <repositories>
+  	<repository>
+	  <id>bukkit-repo</id>
+	  <url>http://repo.bukkit.org/content/groups/public/</url>
+	</repository>
+  </repositories>
+
+  <dependencies>
+	<dependency>
+	  <groupId>org.bukkit</groupId>
+	  <artifactId>bukkit</artifactId>
+	  <version>1.7.9-R0.2-SNAPSHOT</version>
+	  <scope>provided</scope>
+	</dependency>
+  </dependencies>
+  	
+  <build>
+      <defaultGoal>clean package</defaultGoal>
+	  <sourceDirectory>src</sourceDirectory>
+	  <resources>
+		<resource>
+		  <directory>src/main/resources</directory>
+		  <excludes>
+		    <exclude>**/*.java</exclude>
+		  </excludes>
+		  <includes>
+		    <include>**/*.yml</include>
+		  </includes>
+	    </resource>
+	    <resource>
+          <directory>src/main/resources</directory>
+          <filtering>true</filtering>
+          <includes>
+            <include>plugin.yml</include>
+          </includes>
+        </resource>
+	  </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+          <finalName>${project.name}</finalName>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
