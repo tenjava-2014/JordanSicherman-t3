@@ -15,6 +15,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.ApocalypseEvent;
+import main.java.com.tenjava.entries.JordanSicherman.t3.events.ForestFireEvent;
+import main.java.com.tenjava.entries.JordanSicherman.t3.events.PiranhasEvent;
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.PoisonAirEvent;
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent;
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
@@ -124,6 +126,17 @@ public class EventManager {
 			PoisonAirEvent smogEvent = new PoisonAirEvent();
 			smogEvent.setInitializer(proximity == null ? TenJava.instance.getServer().getWorlds().get(0) : proximity.getWorld());
 			smogEvent.start();
+			break;
+		case PIRANHAS:
+			PiranhasEvent piranhasEvent = new PiranhasEvent();
+			piranhasEvent.setInitializer(proximity == null ? TenJava.instance.getServer().getWorlds().get(0) : proximity.getWorld());
+			piranhasEvent.start();
+			break;
+		case FOREST_FIRE:
+			if (proximity == null) { return false; }
+			ForestFireEvent forestEvent = new ForestFireEvent();
+			forestEvent.setInitializer(proximity);
+			forestEvent.start();
 			break;
 		default:
 			break;

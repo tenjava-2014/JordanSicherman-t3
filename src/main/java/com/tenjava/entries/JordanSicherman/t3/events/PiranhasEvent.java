@@ -18,11 +18,9 @@ import org.bukkit.scheduler.BukkitTask;
 /**
  * @author Jordan
  * 
- *         A poison air event. When started, all oxygen becomes fatal and
- *         players exposed begin to take damage. They must be in a liquid to be
- *         safe.
+ *         A piranha event. Makes players take damage when in water.
  */
-public class PoisonAirEvent extends RandomEvent {
+public class PiranhasEvent extends RandomEvent {
 
 	private transient World startWorld;
 	private BukkitTask task = null;
@@ -34,7 +32,7 @@ public class PoisonAirEvent extends RandomEvent {
 	@Override
 	public void start() {
 		if (!canStart()) {
-			TenJava.log("A poisoned air event attempted to, and failed, to begin.");
+			TenJava.log("A piranha event attempted to, and failed, to begin.");
 			return;
 		}
 
@@ -42,12 +40,12 @@ public class PoisonAirEvent extends RandomEvent {
 		EventManager.registerEvent(this);
 
 		for (Player player : startWorld.getPlayers()) {
-			player.sendMessage(ChatColor.BLUE + "Smog rolls in and you feel your throat constrict. Get underwater!");
+			player.sendMessage(ChatColor.BLUE + "Piranhas fall from the sky into all bodies of water. Be careful!");
 		}
 
 		// Start some tasks to make poisoned air damage the player every so
 		// often and cancel the task eventually.
-		task = TenJava.instance.getServer().getScheduler().runTaskTimer(TenJava.instance, new PoisonAirInterrupt(), 60L, 60L);
+		TenJava.instance.getServer().getScheduler().runTaskTimer(TenJava.instance, new PiranhaInterrupt(), 60L, 60L);
 		long duration = RandomManager.getRandomDuration(1200L, 4800L);
 		TenJava.instance.getServer().getScheduler().runTaskLater(TenJava.instance, new Runnable() {
 			@Override
@@ -56,17 +54,17 @@ public class PoisonAirEvent extends RandomEvent {
 			}
 		}, duration);
 
-		TenJava.log("A poisoned air event began in " + startWorld.getName() + " and will clear in " + (duration / 20 / 60) + " minutes.");
+		TenJava.log("A piranha event began in " + startWorld.getName() + " and will clear in " + (duration / 20 / 60) + " minutes.");
 	}
 
-	private class PoisonAirInterrupt extends BukkitRunnable {
+	private class PiranhaInterrupt extends BukkitRunnable {
 
 		@Override
 		public void run() {
 			for (Player player : startWorld.getPlayers()) {
-				if (!player.getEyeLocation().getBlock().isLiquid()) {
+				if (player.getLocation().getBlock().isLiquid()) {
 					player.damage(1.0);
-					player.setLastDamageCause(new EntityDamageEvent(player, DamageCause.POISON, 1.0));
+					player.setLastDamageCause(new EntityDamageEvent(player, DamageCause.ENTITY_ATTACK, 1.0));
 				}
 			}
 		}
@@ -79,13 +77,13 @@ public class PoisonAirEvent extends RandomEvent {
 	public synchronized boolean stop() {
 		if (!isStarted()) { return false; }
 
-		TenJava.log("A poisoned air event ended.");
+		TenJava.log("A piranha event ended.");
 		EventManager.unregisterEvent(this);
 
 		// Cancel the damaging task.
 		task.cancel();
 		for (Player player : startWorld.getPlayers()) {
-			player.sendMessage(ChatColor.BLUE + "The smog has cleared.");
+			player.sendMessage(ChatColor.BLUE + "Without sufficient food, the piranhas have died and the water is safe again.");
 		}
 
 		return true;
