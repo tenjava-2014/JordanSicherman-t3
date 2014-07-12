@@ -1,0 +1,35 @@
+/**
+ * 
+ */
+package main.java.com.tenjava.entries.JordanSicherman.t3.listeners;
+
+import main.java.com.tenjava.entries.JordanSicherman.t3.EventManager;
+import main.java.com.tenjava.entries.JordanSicherman.t3.events.ApocalypseEvent;
+import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+/**
+ * @author Jordan
+ * 
+ */
+public class ApocalypseListener implements Listener {
+
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	private void onDamageEntity(EntityDamageByEntityEvent e) {
+		if (!EventManager.isInEffect(RandomEventType.APOCALYPSE)) { return; }
+
+		Entity damager = e.getDamager();
+		Entity damaged = e.getEntity();
+
+		// Infect other entities if the damager is infected.
+		if (damaged instanceof LivingEntity && ApocalypseEvent.isInfected(damager) && !ApocalypseEvent.isInfected(damaged)) {
+			ApocalypseEvent.infect((LivingEntity) damaged);
+		}
+	}
+}

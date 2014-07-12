@@ -4,7 +4,10 @@
 package main.java.com.tenjava.entries.JordanSicherman.t3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import org.bukkit.Location;
 
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent;
 import main.java.com.tenjava.entries.JordanSicherman.t3.events.RandomEvent.RandomEventType;
@@ -40,13 +43,35 @@ public class EventManager {
 	}
 
 	/**
-	 * Forcibly cancel all events.
+	 * @see EventManager#stopAllEvents(RandomEventType... type).
 	 */
-	public static void stopAllEvents() {
+	public static int stopAllEvents() {
+		return stopAllEvents(RandomEventType.values());
+	}
+
+	/**
+	 * Forcibly cancel all events.
+	 * 
+	 * @param type
+	 *            The RandomEventType(s) to stop.
+	 * @return the number of events stopped.
+	 */
+	public static int stopAllEvents(RandomEventType... type) {
+		int count = 0;
+		List<RandomEventType> types = Arrays.asList(type);
+
 		// Iterate and stop everything.
 		for (RandomEvent event : serverEvents) {
-			event.stop();
+			for (RandomEventType randomevent : types) {
+				if (event.getClass().equals(randomevent.getUnderlyingClass())) {
+					if (event.stop()) {
+						count++;
+					}
+					continue;
+				}
+			}
 		}
+		return count;
 	}
 
 	/**
@@ -72,9 +97,17 @@ public class EventManager {
 	 * 
 	 * @param type
 	 *            The RandomEventType to begin.
+	 * @param proximity
+	 *            A location near where the event should start (or null if not
+	 *            required).
 	 */
-	public static void initializeEvent(RandomEventType type) {
-		// TODO Auto-generated method stub
-
+	public static void initializeEvent(RandomEventType type, Location proximity) {
+		// TODO
+		switch (type) {
+		case APOCALYPSE:
+			break;
+		default:
+			break;
+		}
 	}
 }

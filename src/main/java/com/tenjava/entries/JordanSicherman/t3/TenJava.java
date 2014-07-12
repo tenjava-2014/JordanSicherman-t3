@@ -5,6 +5,7 @@ package main.java.com.tenjava.entries.JordanSicherman.t3;
 
 import main.java.com.tenjava.entries.JordanSicherman.t3.commands.EventCommand;
 
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,6 +16,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class TenJava extends JavaPlugin {
 
 	public static TenJava instance;
+
+	public static void log(String message) {
+		instance.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + message);
+	}
 
 	/**
 	 * Do things when our plugin is enabled.
@@ -41,13 +46,13 @@ public class TenJava extends JavaPlugin {
 	 */
 	public void onDisable() {
 		reloadConfig();
-		
+
 		// Stop our random manager.
 		RandomManager.end();
-		
+
 		// Cancel all our server events.
 		EventManager.stopAllEvents();
-		
+
 		getServer().getScheduler().cancelTasks(this);
 	}
 }

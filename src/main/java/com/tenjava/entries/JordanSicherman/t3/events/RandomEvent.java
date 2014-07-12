@@ -34,8 +34,20 @@ public abstract class RandomEvent {
 			return underlying;
 		}
 
+		/**
+		 * @return a random RandomEventType.
+		 */
 		public static RandomEventType getRandom() {
 			return randomEvents.get(random.nextInt(size));
+		}
+
+		public static String getFormattedListOfEvents() {
+			StringBuilder string = new StringBuilder();
+			for (RandomEventType type : randomEvents) {
+				string.append(type.toString().toLowerCase());
+				string.append(", ");
+			}
+			return string.substring(0, string.length() - 2);
 		}
 	}
 
@@ -47,8 +59,10 @@ public abstract class RandomEvent {
 
 	/**
 	 * Forcibly stop this event.
+	 * 
+	 * @return true if this event was stopped.
 	 */
-	public abstract void stop();
+	public abstract boolean stop();
 
 	/**
 	 * @return true if this event is started.
